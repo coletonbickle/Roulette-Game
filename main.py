@@ -49,8 +49,12 @@ def tell():
     if g == 'quit':
         _kill()
     else:
-        print(f"{Wheel.land}")
-        tell()
+        while True:
+            x = random.randint(-1, 36)  # Testing that randint can return a -1 or 36. (Going tp remove)
+            if x == -1:
+                break
+        print(f"\nX = {x}")
+
 
 def _kill():
     exit()
