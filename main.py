@@ -5,14 +5,15 @@ import random
 
 class Wheel:
     def __init__(self, x=None):
-        self.Wheel = x
+        self.land = x
 
     def val(self):
-        self.Wheel = random.randint(-1, 36)
+        self.land = random.randint(-1, 37)
 
 
 def main():
     ask()
+    tell()
 
 
 def ask():
@@ -42,6 +43,14 @@ def ask():
             _ask2()
     _ask2()
 
+
+def tell():
+    g = input("Type anything to get value and 'quit' to quit: ").lower()
+    if g == 'quit':
+        _kill()
+    else:
+        print(f"{Wheel.land}")
+        tell()
 
 def _kill():
     exit()
