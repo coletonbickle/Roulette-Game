@@ -4,23 +4,35 @@ import random
 
 
 class Wheel:
-    def __init__(self, x=None):
+    def __init__(self, bet, loc, x=0):
+        self.bet = bet
+        self.loc = loc
         self.land = x
 
     def val(self):
         self.land = random.randint(-1, 37)
+        # Create conditionals here to see if bet location matches table outcome
+
+
+class Player:
+    def __init__(self, x=0, y=''):
+        self.money = x
+        self.bet = x
+        self.loc = y
 
 
 def main():
     ask()
-    tell()
+    _bet()
+    outcome = Wheel(Player.bet, Player.loc)
+    outcome.val()
 
 
 def ask():
-    money = float(input("How Much money are you bringing to the Table? (dollar amount): $"))
-    print(f"You have brought ${money:.0f} to the table.")
+    Player.money = float(input("How Much money are you bringing to the Table? (dollar amount): $"))
+    print(f"You have brought ${Player.money:.0f} to the table.")
 
-    def _ask2():
+    while Player.money is not None:
         _ok = str(input("Type 'Ok' to continue or 'quit' to quit: ").lower())
         if _ok == "ok":
             print("\nPayouts:")
@@ -36,24 +48,15 @@ def ask():
             print("19-36 pays even money")
             print("Red or black pays even money")
             print("Odd or even bets pays even money\n")
-            pass
+            break
         elif _ok == "quit":
             _kill()
-        else:
-            _ask2()
-    _ask2()
 
 
-def tell():
-    g = input("Type anything to get value and 'quit' to quit: ").lower()
-    if g == 'quit':
-        _kill()
-    else:
-        while True:
-            x = random.randint(-1, 36)  # Testing that randint can return a -1 or 36. (Going tp remove)
-            if x == -1:
-                break
-        print(f"\nX = {x}")
+def _bet():
+    print("How much do you want to bet and where do you want it?")
+    Player.loc = str(input("Type where you would like to place your bet:\n"))
+    Player.bet = input(f"(${Player.money} remaining)How much would you like to bet? \n$")
 
 
 def _kill():
