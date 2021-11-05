@@ -1,5 +1,5 @@
-import math as math
-import numpy as np
+# import math as math
+# import numpy as np
 import random
 
 
@@ -8,10 +8,52 @@ class Wheel:
         self.bet = bet
         self.loc = loc
         self.land = x
+        self.color = None
+        self.evens = None
+        self.lows = None
+        self.dozens = None
+        self.columns = None
 
     def val(self):
         self.land = random.randint(-1, 37)
         # Create conditionals here to see if bet location matches table outcome
+
+    def output(self):
+        if self.land != (0 or -1):
+            # Checks if landed value is red or black
+            num = [1, 2, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36]
+            if self.land in num:
+                self.color = 'red'
+            else:
+                self.color = 'black'
+
+            # Checks if landed value is even or odd
+            if (self.land % 2) == 0:
+                self.evens = 'even'
+            else:
+                self.evens = 'odd'
+
+            # Checks if landed value is high or low
+            if self.land < 19:
+                self.lows = 'low'
+            else:
+                self.lows = 'high'
+
+            # Checks which dozen landed value is in
+            if self.land in range(1, 12):
+                self.dozens = 'first'
+            elif self.land in range(13, 24):
+                self.dozens = 'second'
+            else:
+                self.dozens = 'third'
+
+            # Checks which column landed value is in
+            if (self.land % 3) == 1:
+                self.columns = 'col1'
+            elif (self.land % 3) == 2:
+                self.columns = 'col2'
+            else:
+                self.columns = 'col3'
 
 
 class Player:
@@ -39,6 +81,7 @@ def ask():
             break
         elif _ok == "quit":
             _kill()
+
 
 def _payout():
     print("\nPayouts:")
